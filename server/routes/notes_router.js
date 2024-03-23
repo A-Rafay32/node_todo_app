@@ -1,77 +1,79 @@
 const express = require("express");
-const Notes = require("../models/notes");
+const Note = require("../models/notes");
+const auth = require("../middlewares/auth_middleware");
+const validateNotes = require("../middlewares/note_middleware")
+const validateTask = require("../middlewares/task_middleware")
 const notesRouter = express.Router();
-const auth = require("../middlewares/auth");
 
-
-// SIGN UP
+//CREATE NOTES
 notesRouter.post("/api/create/notes", auth, async (req, res) => {
     try {
-        const { title, description, priority } = req.body;
+        const { userId, title, description, tasks } = req.body;
 
-        const existingNote = await User.findOne({ title });
-        if (existingNote) {
-            return res
-                .status(400)
-                .json({ msg: "Note with same title already exists!" });
-        }
-
-        let note = new Notes({
+        const newNote = new Note({
+            userId: userId,
             title: title,
             description: description,
-            priority: priority,
-            status: false
+            task: tasks,
         });
-        note = await note.save();
-        res.json(note);
-    } catch (e) {
-        res.status(500).json({ error: e.message });
+
+        const savedNote = await newNote.save();
+        res.status(201).json(savedNote);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
     }
 });
 
-// // Sign In Route
-// authRouter.post("/api/signin", async (req, res) => {
-//     try {
-//         const { email, password } = req.body;
 
-//         const user = await User.findOne({ email });
-//         if (!user) {
-//             return res
-//                 .status(400)
-//                 .json({ msg: "User with this email does not exist!" });
-//         }
 
-//         const isMatch = await bcryptjs.compare(password, user.password);
-//         if (!isMatch) {
-//             return res.status(400).json({ msg: "Incorrect password." });
-//         }
+// Update note title
+notesRouter.put("/api/update/note/:noteId", auth, validateNotes, async (req, res) => {
+    try {
+        const { title, description } = req.body;
+        const note = req.note;
 
-//         const token = jwt.sign({ id: user._id }, "passwordKey");
-//         res.json({ token, ...user._doc });
-//     } catch (e) {
-//         res.status(500).json({ error: e.message });
-//     }
-// });
+        note.title = title;
+        note.description = description;
 
-// authRouter.post("/tokenIsValid", async (req, res) => {
-//     try {
-//         const token = req.header("x-auth-token");
-//         if (!token) return res.json(false);
-//         const verified = jwt.verify(token, "passwordKey");
-//         if (!verified) return res.json(false);
 
-//         const user = await User.findById(verified.id);
-//         if (!user) return res.json(false);
-//         res.json(true);
-//     } catch (e) {
-//         res.status(500).json({ error: e.message });
-//     }
-// });
+        await note.save();
+        res.json(note);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
 
-// // get user data
-// authRouter.get("/", auth, async (req, res) => {
-//     const user = await User.findById(req.user);
-//     res.json({ ...user._doc, token: req.token });
-// });
+
+// Delete note
+notesRouter.delete("/api/delete/note/:noteId", auth, validateNotes, async (req, res) => {
+    try {
+        const note = req.note;
+        await note.deleteOne();
+        res.json({ msg: "Note deleted successfully" });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// Get all note for a user
+notesRouter.get("/api/notes/:userId", auth, async (req, res) => {
+    try {
+        const note = await Note.find({ userId: req.params.userId });
+        res.json(note);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+
+// Get all notes
+notesRouter.get("/api/notes/", auth, async (req, res) => {
+    try {
+        const tasks = await Note.find();
+        res.json(tasks);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
 
 module.exports = notesRouter;

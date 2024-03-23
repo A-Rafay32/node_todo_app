@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const notesSchema = require("./notes");
 
 const userSchema = mongoose.Schema({
     name: {
@@ -28,7 +27,6 @@ const userSchema = mongoose.Schema({
         type: String,
         default: "user",
     },
-    notes: [notesSchema], // Define notes as an array of objects using notesSchema
 });
 
 const User = mongoose.model("User", userSchema);

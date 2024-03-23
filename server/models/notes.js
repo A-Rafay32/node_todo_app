@@ -1,24 +1,26 @@
-// notes.js
 const mongoose = require("mongoose");
+const taskSchema = require("./task");
 
-const notesSchema = new mongoose.Schema({
-  title: {
-    required: true,
-    type: String,
-    trim: true,
-  },
-  description: {
-    required: true,
-    type: String,
-  },
-  priority: {
-    required: true,
-    type: Number,
-  },
-  status: {
-    required: true,
-    type: Boolean,
-  }
+
+const notesSchema = mongoose.Schema({
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
+    title: {
+        type: String,
+        required: true,
+        trim: true,
+        default: "Untitled Note"
+    },
+    description: {
+        type: String,
+        trim: true,
+        default: ""
+    },
+    tasks: [taskSchema.taskSchema],
 });
 
-module.exports = notesSchema;
+const Notes = mongoose.model("Notes", notesSchema);
+module.exports = Notes;
