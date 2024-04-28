@@ -1,6 +1,6 @@
 const Notes = require("../models/notes");
 
-const validateNotes = async (req, res, next) => {
+const validateNote = async (req, res, next) => {
     try {
         const note = await Notes.findById(req.params.noteId);
         if (!note) {
@@ -13,4 +13,4 @@ const validateNotes = async (req, res, next) => {
     }
 };
 
-module.exports = validateNotes; 
+module.exports = validateNote; 
