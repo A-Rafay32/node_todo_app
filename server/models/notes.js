@@ -20,7 +20,10 @@ const notesSchema = mongoose.Schema({
         default: ""
     },
     tasks: [taskSchema.taskSchema],
-});
+
+},
+    { timestamps: true }
+);
 
 const Notes = mongoose.model("Notes", notesSchema);
 module.exports = Notes;

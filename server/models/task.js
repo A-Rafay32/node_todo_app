@@ -23,7 +23,10 @@ const taskSchema = mongoose.Schema({
     enum: category,
     default: category.at(category.length - 1)
   }
-});
+},
+  { timestamps: true }
+
+);
 
 const Task = mongoose.model("Task", taskSchema);
 module.exports = { Task, taskSchema };

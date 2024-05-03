@@ -62,9 +62,10 @@ class AppTextFieldDecorations {
       ),
       contentPadding: const EdgeInsets.symmetric(horizontal: 40, vertical: 25),
       labelText: "Email",
-      labelStyle: const TextStyle(color: AppColors.primaryColor),
+      labelStyle: const TextStyle(color: AppColors.secondaryColor),
       floatingLabelBehavior: FloatingLabelBehavior.always,
       hintText: "Enter your email",
+      hintStyle: AppTextTheme.bodyMedium.copyWith(color: AppColors.textColor),
       focusedErrorBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Colors.red.shade900),
           borderRadius: BorderRadius.circular(25),
@@ -74,11 +75,11 @@ class AppTextFieldDecorations {
           borderRadius: BorderRadius.circular(25),
           gapPadding: 10),
       focusedBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: AppColors.primaryColor),
+          borderSide: const BorderSide(color: AppColors.secondaryColor),
           borderRadius: BorderRadius.circular(25),
           gapPadding: 10),
       enabledBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: AppColors.primaryColor),
+          borderSide: const BorderSide(color: AppColors.secondaryColor),
           borderRadius: BorderRadius.circular(25),
           gapPadding: 10));
 
@@ -106,9 +107,10 @@ class AppTextFieldDecorations {
         contentPadding:
             const EdgeInsets.symmetric(horizontal: 40, vertical: 25),
         labelText: "Password",
-        labelStyle: const TextStyle(color: AppColors.primaryColor),
+        labelStyle: const TextStyle(color: AppColors.secondaryColor),
         floatingLabelBehavior: FloatingLabelBehavior.always,
         hintText: "Enter your password",
+        hintStyle: AppTextTheme.bodyMedium.copyWith(color: AppColors.textColor),
         focusedErrorBorder: OutlineInputBorder(
             borderSide: BorderSide(color: Colors.red.shade900),
             borderRadius: BorderRadius.circular(25),
@@ -118,11 +120,11 @@ class AppTextFieldDecorations {
             borderRadius: BorderRadius.circular(25),
             gapPadding: 10),
         focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: AppColors.primaryColor),
+            borderSide: const BorderSide(color: AppColors.secondaryColor),
             borderRadius: BorderRadius.circular(25),
             gapPadding: 10),
         enabledBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: AppColors.primaryColor),
+            borderSide: const BorderSide(color: AppColors.secondaryColor),
             borderRadius: BorderRadius.circular(25),
             gapPadding: 10));
   }
@@ -136,7 +138,7 @@ class AppTextFieldDecorations {
         contentPadding:
             const EdgeInsets.symmetric(horizontal: 40, vertical: 25),
         labelText: label,
-        labelStyle: const TextStyle(color: AppColors.primaryColor),
+        labelStyle: const TextStyle(color: AppColors.secondaryColor),
         floatingLabelBehavior: FloatingLabelBehavior.always,
         hintText: "Enter your ${label.toLowerCase()}",
         focusedErrorBorder: OutlineInputBorder(

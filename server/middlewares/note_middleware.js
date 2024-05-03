@@ -2,7 +2,7 @@ const Notes = require("../models/notes");
 
 const validateNote = async (req, res, next) => {
     try {
-        const note = await Notes.findById(req.params.noteId);
+        const note = await Notes.findById(req.params.id);
         if (!note) {
             return res.status(404).json({ msg: "Note not found" });
         }

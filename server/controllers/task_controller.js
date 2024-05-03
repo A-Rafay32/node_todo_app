@@ -11,6 +11,39 @@ module.exports = {
         }
     },
 
+    // getTaskById: async (req, res) => {
+    //     try {
+    //         const taskId = req.params.id;
+    //         if (!taskId) {
+    //             return res.status(400).json({
+    //                 code: 400,
+    //                 message: "id is required",
+    //             });
+    //         }
+
+    //         const foundTask = Task.findById(taskId);
+    //         if (!foundTask) {
+    //             return res.status(400).json({
+    //                 code: 400,
+    //                 message: "Task does not found",
+    //             });
+    //         }
+
+    //         res.status(200).json({
+    //             code: 200,
+    //             message: "Task found successfully",
+    //             data: foundTask
+    //         })
+    //     } catch (error) {
+    //         res.status(500).json({
+    //             code: 500,
+    //             error: error.name,
+    //             message: error.message,
+    //         });
+    //     }
+
+    // },
+
     createTask: async (req, res) => {
         try {
             const note = req.note;

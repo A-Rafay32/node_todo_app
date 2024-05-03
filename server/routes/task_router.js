@@ -5,6 +5,13 @@ const validateNotes = require("../middlewares/note_middleware");
 const { createTask, updateTask, updateTaskStatus, deleteTask, getAllTasks } = require("../controllers/task_controller");
 const { auth } = require("../middlewares/auth_middleware");
 
+// Get all tasks for a note
+taskRouter.get("/:noteId",
+    auth,
+    validateNotes,
+    getAllTasks
+);
+
 
 // add task
 taskRouter.patch("/create/:noteId",
@@ -29,18 +36,12 @@ taskRouter.patch("/done/:noteId/:taskId",
 );
 
 // Delete task
-taskRouter.delete("/delete/task/:noteId/:taskId",
+taskRouter.delete("/delete/:noteId/:taskId",
     auth,
     validateTask,
     deleteTask
 );
 
-// Get all tasks for a note
-taskRouter.get("/:noteId",
-    auth,
-    validateNotes,
-    getAllTasks
-);
 
 
 

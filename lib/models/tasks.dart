@@ -13,7 +13,7 @@ class Task {
     required this.category,
   });
 
-  factory Task.fromJson(Map<String, dynamic> json) {
+  factory Task.fromJson(Map json) {
     return Task(
       title: json['title'],
       priority: json['priority'] ?? 1,

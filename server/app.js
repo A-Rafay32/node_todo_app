@@ -14,8 +14,8 @@ const app = express();
 //routes
 app.use(express.json());
 app.use("/auth", authRouter);
-// app.use("/task", taskRouter);
-// app.use("/notes", notesRouter);
+app.use("/task", taskRouter);
+app.use("/notes", notesRouter);
 
 //connections
 mongoose.connect(DB).then(() => console.log("Connection Succesful")).catch((e) => console.log(e));
